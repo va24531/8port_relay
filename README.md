@@ -15,7 +15,7 @@ Requirements: Raspberry Pi (2/3B/4 or newer)
               Raspberry Pi GPIO (node-red-node-pi-gpio v1.2.3 or newer)
               
 
-New Features:
+Newly Added Features:
 
   - Option to restore last relay settings on startup, or return to pre-configured state.
   - Automatically save relay settings on any change to file 'relay_controller_settings.csv'
@@ -40,6 +40,8 @@ New Features:
     
     - Can accept commands from home automation controllers that can issue HTTP GET commands, such as Domoticz, to change status of relay based on external events/triggers. 
     - [TODO] Allow home automation controllers to be able to request status in a uniformed manner (json?) [TODO]
+  
+    - Dashboard now shows last 8 commands issued, as well as timestamp and if it was does by the [D]ashboard or by [A]PI command.
   
   
 
