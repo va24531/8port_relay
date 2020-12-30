@@ -54,7 +54,7 @@ HTTP API Examples :
       http://pi_ip_address:1880/api?action=set&relay=1&value=0     (Sets Relay 1 to 0*)
       http://pi_ip_address:1880/api?action=set&relay=4             (Sets Relay 4 to 0)
 
-      http://pi_ip_address:1880/api?action=status          (Shows human readable details/status of all relays)
+      http://pi_ip_address:1880/api?action=status     (Shows human readable details/status of all relays)
 
         * value is not defined as 'On' or 'Off' to allow for L2H as well as H2L relay boards.
 
