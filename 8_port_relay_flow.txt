@@ -16,7 +16,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 1020,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "4585c58.cebe9bc"
@@ -30,8 +30,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1210,
-        "y": 220,
+        "x": 1230,
+        "y": 120,
         "wires": []
     },
     {
@@ -56,7 +56,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 160,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
                 "6283778f.f3786"
@@ -68,13 +68,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "Config Settings",
-        "func": "\n//Disable relay pins at startup until manually changed\n// IE: IF there was a issue whereas the pi lost power, maybe\n//      it's better that the devices attached stay off until it\n//      can be verified that the issue no long exist.\n\n// Flows hold variables so that they may be called by other functions\n\nflow.set('option_save_settings', true);\nflow.set('option_load_settings', true);\n\n// ------------------------------------------------------------------------//\n//  Start Hardware / GPIO Configuration\n//      Each relay must be assigned a valid GPIO pin number, or 99 to to disable.\n//      Valid GPIO Pins are 29, 31-33, 35-38, and 40. They do NOT have to be\n//      assigned in numerical order.\n\nflow.set('relay_1_pin',31); \nflow.set('relay_2_pin',32); \nflow.set('relay_3_pin',99); \nflow.set('relay_4_pin',99); \nflow.set('relay_5_pin',99); \nflow.set('relay_6_pin',99); \nflow.set('relay_7_pin',99); \nflow.set('relay_8_pin',99); \n\n//  This section defines default startup pin value and change be changed for each\n//  individual GPIO Pin / Relay. This may be changed to reflect a controller boards\n//  need for Low to High (LTH) or High to Low (HTL) to be active.\n\nflow.set('relay_1_status',0); \nflow.set('relay_2_status',0); \nflow.set('relay_3_status',0); \nflow.set('relay_4_status',0); \nflow.set('relay_5_status',0); \nflow.set('relay_6_status',0); \nflow.set('relay_7_status',0); \nflow.set('relay_8_status',0); \n\n//  This section defines what state should be considered as 'On'. Depending on controller board\n//  this may be LTH or HTL. Change value from 1 to 0 if the dashboard LED is opposite of intended\n//   relay setting ( ie: Relay is energized but Dashboard LED shows 'Off')\n\nflow.set('relay_1_output_on',1);\nflow.set('relay_2_output_on',1);\nflow.set('relay_3_output_on',1);\nflow.set('relay_4_output_on',1);\nflow.set('relay_5_output_on',1);\nflow.set('relay_6_output_on',1);\nflow.set('relay_7_output_on',1);\nflow.set('relay_8_output_on',1);\n\n//  End Hardware / GPIO Configuration\n// ------------------------------------------------------------------------//\n\n\n\n// ------------------------------------------------------------------------//\n//  Start Button Dashboard Configuration\n//      Sets button names for the individual relays. It doesn't effect the usage of\n//      program at all otherwise. API command will show the relay names if using ?action=settings\n\nflow.set('relay_1_text_name', 'Long Relay Name Goes Here');\nflow.set('relay_2_text_name', 'Relay 2');\nflow.set('relay_3_text_name', 'Relay 3');\nflow.set('relay_4_text_name', 'Relay 4');\nflow.set('relay_5_text_name', 'Relay 5');\nflow.set('relay_6_text_name', 'Relay 6');\nflow.set('relay_7_text_name', 'Relay 7');\nflow.set('relay_8_text_name', 'Relay 8');\n\nflow.set('relay_1_button_enabled', 1); // 1 = Enabled; 0 = Disabled\nflow.set('relay_2_button_enabled', 0); // Does NOT affect API 'set' command\nflow.set('relay_3_button_enabled', 0); // only enables/disables dashboard button\nflow.set('relay_4_button_enabled', 0); \nflow.set('relay_5_button_enabled', 0); \nflow.set('relay_6_button_enabled', 0); \nflow.set('relay_7_button_enabled', 0); \nflow.set('relay_8_button_enabled', 0); \n\n//  End Button Dashboard Configuration\n// ------------------------------------------------------------------------//\n\nflow.set('template_log','1,2,3,4,5,6,7,8');\n\nreturn msg;",
+        "func": "\n//Disable relay pins at startup until manually changed\n// IE: IF there was a issue whereas the pi lost power, maybe\n//      it's better that the devices attached stay off until it\n//      can be verified that the issue no long exist.\n\n// Flows hold variables so that they may be called by other functions\n\nflow.set('option_save_settings', true);\nflow.set('option_load_settings', true);\n\n// ------------------------------------------------------------------------//\n//  Start Hardware / GPIO Configuration\n//      Each relay must be assigned a valid GPIO pin number, or 99 to to disable.\n//      Valid GPIO Pins are 29, 31-33, 35-38, and 40. They do NOT have to be\n//      assigned in numerical order.\n\nflow.set('relay_1_pin',31); \nflow.set('relay_2_pin',32); \nflow.set('relay_3_pin',99); \nflow.set('relay_4_pin',99); \nflow.set('relay_5_pin',99);  // * If 5-8 are set to disabled (99) and \nflow.set('relay_6_pin',99);  // * show_relay_5-8_box_mode is set to 'auto'\nflow.set('relay_7_pin',99);  // * then these will not show in the gui\nflow.set('relay_8_pin',99);  // *\n\n//  This section defines default startup pin value and change be changed for each\n//  individual GPIO Pin / Relay. This may be changed to reflect a controller boards\n//  need for Low to High (LTH) or High to Low (HTL) to be active.\n\nflow.set('relay_1_status',0); \nflow.set('relay_2_status',0); \nflow.set('relay_3_status',0); \nflow.set('relay_4_status',0); \nflow.set('relay_5_status',0); \nflow.set('relay_6_status',0); \nflow.set('relay_7_status',0); \nflow.set('relay_8_status',0); \n\n//  This section defines what state should be considered as 'On'. Depending on controller board\n//  this may be LTH or HTL. Change value from 1 to 0 if the dashboard LED is opposite of intended\n//   relay setting ( ie: Relay is energized but Dashboard LED shows 'Off')\n\nflow.set('relay_1_output_on',1);\nflow.set('relay_2_output_on',1);\nflow.set('relay_3_output_on',1);\nflow.set('relay_4_output_on',1);\nflow.set('relay_5_output_on',1);\nflow.set('relay_6_output_on',1);\nflow.set('relay_7_output_on',1);\nflow.set('relay_8_output_on',1);\n\n//  End Hardware / GPIO Configuration\n// ------------------------------------------------------------------------//\n\n\n\n// ------------------------------------------------------------------------//\n//  Start Button Dashboard Configuration\n//      Sets button names for the individual relays. It doesn't effect the usage of\n//      program at all otherwise. API command will show the relay names if using ?action=settings\n\nflow.set('relay_1_text_name', 'AC Power Relay 1');\nflow.set('relay_2_text_name', 'AC Power Relay 2');\nflow.set('relay_3_text_name', 'DC Power Relay 1');\nflow.set('relay_4_text_name', 'DC Power Relay 2');\nflow.set('relay_5_text_name', 'HVAC Fan Relay 1');\nflow.set('relay_6_text_name', 'HVAC Fan Relay 2');\nflow.set('relay_7_text_name', 'Water Heater Relay 1');\nflow.set('relay_8_text_name', 'Water Heater Relay 2');\n\n\nflow.set('relay_1_button_enabled', 1); // 1 = Enabled; 0 = Disabled\nflow.set('relay_2_button_enabled', 1); // Does NOT affect API 'set' command\nflow.set('relay_3_button_enabled', 1); // only enables/disables dashboard button\nflow.set('relay_4_button_enabled', 1); //\nflow.set('relay_5_button_enabled', 1); // ** If GPIO Pin Number is 99,\nflow.set('relay_6_button_enabled', 1); //    Button Is Automatically Disabled!\nflow.set('relay_7_button_enabled', 1); // \nflow.set('relay_8_button_enabled', 1); //\n\nflow.set('show_relay_5-8_box_mode', 'auto'); // values of 'auto' or 'user' (user defined)\nflow.set('show_relay_5-8_box',true); // if above is 'user', valid value is true or false\nflow.set('show_relay_log_output', true);\n\n//  End Button Dashboard Configuration\n// ------------------------------------------------------------------------//\n\nflow.set('template_log',',,,,,,,,');\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "x": 320,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
                 "26784e11.619be2",
@@ -87,16 +87,18 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "//var d = new Date();\n//            if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n//            if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n//            if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n//        msg.template_message = '[' + hours + ':' + minutes + ':' + seconds + '] [A] ';\n\nif (msg.payload.action === 'get'){\n        \n        output = 'Check Syntax; ?action=get&relay=1'; // Default Bad Output\n\n        if (msg.payload.relay === ''){\n            \n                        output  = 'r1=' + flow.get('relay_1_status') + ',r2=' + flow.get('relay_2_status') + ',r3=' + flow.get('relay_3_status') + ',r4=' + flow.get('relay_4_status') + ',r5=' + flow.get('relay_5_status') + ',r6=' + flow.get('relay_6_status') + ',r7=' + flow.get('relay_7_status') + ',r8=' + flow.get('relay_8_status');\n                        msg.template_message = ' CSV Status Requested';\n        }\n\n        else {\n                    if (parseInt(msg.payload.relay) > 0 && parseInt(msg.payload.relay) < 9){\n                        output = 'r' + parseInt(msg.payload.relay) + '=' + flow.get('relay_' + parseInt(msg.payload.relay) + '_status');\n                        msg.template_message = ' Relay ' + parseInt(msg.payload.relay) + ' Status Request';\n                    }\n        }\n\n        msg.payload = output;    \nreturn msg;\n}\n\nif (msg.payload.action === 'set'){\n        \n        output = 'Check Syntax; ?action=set&relay=1&value=0'; // Default Bad Output\n        relay_id = parseInt(msg.payload.relay);\n        relay_value = parseInt(msg.payload.value);\n        \n        if (relay_id > 0 && relay_id < 9) { // Realys 1-8 Accessable\n        \n                    if (relay_value === 1){ flow.set('relay_' + relay_id + '_status',1);} else { flow.set('relay_' + relay_id + '_status',0);}\n                    output = 'r' + parseInt(msg.payload.relay) + '=' + flow.get('relay_' + parseInt(msg.payload.relay) + '_status');\n                    msg.template_message = ' Relay ' + parseInt(msg.payload.relay) + ' SET ';\n                    \n                        if (flow.get('relay_'+ relay_id +'_status') === flow.get('relay_'+ relay_id +'_output_on')){ msg.template_message += ' On'; } else { msg.template_message += ' Off'; }\n\n                    }\n        \n        msg.payload = output;    \nreturn msg;\n}\n\n\n\nif (msg.payload.action === 'status'){\n    output = ''; var i;\n        for (i = 1; i < 9; i++) { output += ' Relay ' + i + ' Name : <b>' + flow.get('relay_'+i+'_text_name') + '</b> On GPIO Pin : <b>' + flow.get('relay_'+i+'_pin') + '</b> Current Mode : <b>' + flow.get('relay_'+i+'_status') + '</b><br>';}\n    msg.template_message = ' Full Readable Status Requested';\n    msg.payload = output;    \nreturn msg;\n}\n\n\n\n\n\n\n\n// Otherwise\nmsg.payload = 'Command Failed, Incorrect Syntax';\nreturn msg;\n",
+        "func": "\nif (msg.payload.action === 'get'){\n        \n        output = 'Check Syntax; ?action=get&relay=1'; // Default Bad Output\n\n        if (msg.payload.relay === ''){\n            \n                        output = '';\n                        for (j = 1; j < 9; j++){ output  += 'r' + j + '=' + flow.get('relay_' + j + '_status'); if (j < 8) {output += ',';} }\n                        \n                        msg.template_from = 'A';\n                        msg.template_type = 'status_request';\n                        msg.template_relay_number = 0;\n\n        }\n\n        else {\n                    if (parseInt(msg.payload.relay) > 0 && parseInt(msg.payload.relay) < 9){\n                        output = 'r' + parseInt(msg.payload.relay) + '=' + flow.get('relay_' + parseInt(msg.payload.relay) + '_status');\n                        msg.template_from = 'A';\n                        msg.template_type = 'status_request';\n                        msg.template_relay_number = parseInt(msg.payload.relay);\n                    }\n        }\n\n        msg.payload = output;    \nreturn msg;\n}\n\nif (msg.payload.action === 'set'){\n        \n        output = 'Check Syntax; ?action=set&relay=1&value=0'; // Default Bad Output\n        relay_id = parseInt(msg.payload.relay);\n        relay_value = parseInt(msg.payload.value);\n        \n        if (relay_id > 0 && relay_id < 9) { // Realys 1-8 Accessable\n        \n                    if (relay_value === 1){ flow.set('relay_' + relay_id + '_status',1);} else { flow.set('relay_' + relay_id + '_status',0);}\n                    output = 'r' + parseInt(msg.payload.relay) + '=' + flow.get('relay_' + parseInt(msg.payload.relay) + '_status');\n\n                        msg.template_from = 'A';\n                        msg.template_type = 'action';\n                        msg.template_relay_verb = 'Set To';\n                        msg.template_relay_number = parseInt(msg.payload.relay);\n                    \n                    }\n        \n        msg.payload = output;    \nreturn msg;\n}\n\n\n\nif (msg.payload.action === 'status'){\n    output = ''; var i;\n        for (i = 1; i < 9; i++) { output += ' Relay ' + i + ' Name : <b>' + flow.get('relay_'+i+'_text_name') + '</b> On GPIO Pin : <b>' + flow.get('relay_'+i+'_pin') + '</b> Current Mode : <b>' + flow.get('relay_'+i+'_status') + '</b><br>';}\n\n        msg.template_from = 'A';\n        msg.template_type = 'status_request';\n    \n    msg.payload = output;    \nreturn msg;\n}\n\n\n\n\n\n\n\n// Otherwise\nmsg.payload = 'Command Failed, Incorrect Syntax';\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1180,
-        "y": 140,
+        "x": 1020,
+        "y": 160,
         "wires": [
             [
-                "e91de6ee.b0da28"
+                "78aaf665.9012a8",
+                "45303002.d316e",
+                "98421a67.23cad8"
             ]
         ]
     },
@@ -107,7 +109,7 @@
         "name": "HTTP API Section",
         "info": "http://pi_ip_address:1880/api?{{command here}}\n\n?action=get&relay=      (Shows csv for each relay current status)\n?action=get&relay=1     (Shows only relay 1 current status)\n\n?action=set&relay=1&value=1     (Sets Relay 1 to 1)\n?action=set&relay=1&value=0     (Sets Relay 1 to 0)\n?action=set&relay=4             (Sets Relay 4 to 0)\n\n?action=status          (Shows human readable details/status of all relays)",
         "x": 1050,
-        "y": 100,
+        "y": 80,
         "wires": []
     },
     {
@@ -123,8 +125,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1030,
-        "y": 220,
+        "x": 1250,
+        "y": 80,
         "wires": []
     },
     {
@@ -145,8 +147,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "1",
-        "x": 480,
-        "y": 440,
+        "x": 540,
+        "y": 500,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -158,13 +160,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 1\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 1\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 440,
+        "x": 380,
+        "y": 500,
         "wires": [
             [
                 "65328a8d.3399cc"
@@ -193,7 +195,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 200,
-        "y": 160,
+        "y": 140,
         "wires": [
             [
                 "26784e11.619be2"
@@ -211,7 +213,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 800,
+        "y": 780,
         "wires": [
             [
                 "1588abba.43e0b4"
@@ -244,7 +246,7 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 1 LED",
         "x": 1250,
-        "y": 800,
+        "y": 780,
         "wires": []
     },
     {
@@ -273,7 +275,7 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 2 LED",
         "x": 1250,
-        "y": 840,
+        "y": 820,
         "wires": []
     },
     {
@@ -302,7 +304,7 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 3 LED",
         "x": 1250,
-        "y": 880,
+        "y": 860,
         "wires": []
     },
     {
@@ -331,15 +333,15 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 4 LED",
         "x": 1250,
-        "y": 920,
+        "y": 900,
         "wires": []
     },
     {
         "id": "69eebb23.af07f4",
         "type": "ui_led",
         "z": "a737bfca.817f7",
-        "group": "51732215.f4e07c",
-        "order": 19,
+        "group": "dacf2722.e769b",
+        "order": 3,
         "width": 1,
         "height": 1,
         "label": "",
@@ -360,15 +362,15 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 5 LED",
         "x": 1250,
-        "y": 960,
+        "y": 940,
         "wires": []
     },
     {
         "id": "c1854f5e.6b3908",
         "type": "ui_led",
         "z": "a737bfca.817f7",
-        "group": "51732215.f4e07c",
-        "order": 23,
+        "group": "dacf2722.e769b",
+        "order": 7,
         "width": 1,
         "height": 1,
         "label": "",
@@ -389,15 +391,15 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 6 LED",
         "x": 1250,
-        "y": 1000,
+        "y": 980,
         "wires": []
     },
     {
         "id": "c49ce05b.c2174",
         "type": "ui_led",
         "z": "a737bfca.817f7",
-        "group": "51732215.f4e07c",
-        "order": 27,
+        "group": "dacf2722.e769b",
+        "order": 11,
         "width": 1,
         "height": 1,
         "label": "",
@@ -418,15 +420,15 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 7 LED",
         "x": 1250,
-        "y": 1040,
+        "y": 1020,
         "wires": []
     },
     {
         "id": "4b7bf198.28b838",
         "type": "ui_led",
         "z": "a737bfca.817f7",
-        "group": "51732215.f4e07c",
-        "order": 31,
+        "group": "dacf2722.e769b",
+        "order": 15,
         "width": 1,
         "height": 1,
         "label": "",
@@ -447,7 +449,7 @@
         "allowColorForValueInMessage": false,
         "name": "Relay 8 LED",
         "x": 1250,
-        "y": 1080,
+        "y": 1060,
         "wires": []
     },
     {
@@ -461,7 +463,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 840,
+        "y": 820,
         "wires": [
             [
                 "2fd9f422.1e7b1c"
@@ -479,7 +481,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 880,
+        "y": 860,
         "wires": [
             [
                 "dde914c0.10e71"
@@ -497,7 +499,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 920,
+        "y": 900,
         "wires": [
             [
                 "9afd67b6.e3e068"
@@ -515,7 +517,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 960,
+        "y": 940,
         "wires": [
             [
                 "69eebb23.af07f4"
@@ -533,7 +535,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 1000,
+        "y": 980,
         "wires": [
             [
                 "c1854f5e.6b3908"
@@ -551,7 +553,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 1040,
+        "y": 1020,
         "wires": [
             [
                 "c49ce05b.c2174"
@@ -569,7 +571,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 1080,
+        "y": 1060,
         "wires": [
             [
                 "4b7bf198.28b838"
@@ -587,7 +589,7 @@
         "initialize": "",
         "finalize": "",
         "x": 900,
-        "y": 800,
+        "y": 780,
         "wires": [
             [
                 "a45c08d2.05357",
@@ -611,8 +613,8 @@
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 140,
-        "y": 580,
+        "x": 200,
+        "y": 660,
         "wires": [
             [
                 "64ae3ddc.ffde84",
@@ -634,10 +636,11 @@
         "links": [
             "286745e3.2178c2",
             "fd2a3975.f2e81",
-            "62f7ed42.c73c8c"
+            "62f7ed42.c73c8c",
+            "409c57a9.be6f4"
         ],
         "x": 415,
-        "y": 160,
+        "y": 140,
         "wires": []
     },
     {
@@ -649,7 +652,7 @@
             "26784e11.619be2"
         ],
         "x": 795,
-        "y": 760,
+        "y": 740,
         "wires": [
             [
                 "994f1253.bbd358"
@@ -665,7 +668,7 @@
             "26784e11.619be2"
         ],
         "x": 95,
-        "y": 520,
+        "y": 660,
         "wires": [
             [
                 "52542cb4.85ff5c"
@@ -677,16 +680,16 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "Update Status",
-        "func": "if (msg.payload === 'flip'){\n\n    if (flow.get('relay_' + msg.topic + '_status') === 1) {\n            \n                flow.set('relay_' + msg.topic + '_status',0);}\n    else {\n                flow.set('relay_' + msg.topic + '_status',1);\n    }\n \n //---------------------------------------------------- Sets Template Message To Push ---------------------------------\n        var d = new Date();\n            if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n            if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n            if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n        \n        msg.template_message = '[' + hours + ':' + minutes + ':' + seconds + '] ';\n        msg.template_message += '[D] ' + flow.get('relay_'+ msg.topic +'_text_name');\n        if (flow.get('relay_'+ msg.topic +'_status') === flow.get('relay_'+ msg.topic +'_output_on')){\n                msg.template_message += ' On';\n        } else {\n                    msg.template_message += ' Off';\n        }\n//---------------------------------------------------- Sets Template Message To Push ---------------------------------\n        \n}\nreturn msg;",
+        "func": "if (msg.payload === 'flip'){\n\n    if (flow.get('relay_' + msg.topic + '_status') === 1) {\n            \n                flow.set('relay_' + msg.topic + '_status',0);}\n    else {\n                flow.set('relay_' + msg.topic + '_status',1);\n    }\n \n \n \n \n \n    msg.template_from = 'D';\n    msg.template_type = 'action';\n    msg.template_relay_verb = 'Manually';\n    msg.template_relay_number = parseInt(msg.topic);\n \n \n //---------------------------------------------------- Sets Template Message To Push ---------------------------------\n //       var d = new Date();\n //           if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n //           if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n //           if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n        \n //       msg.template_message = '[' + hours + ':' + minutes + ':' + seconds + '] ';\n //       msg.template_message += '[D] ' + flow.get('relay_'+ msg.topic +'_text_name');\n //       if (flow.get('relay_'+ msg.topic +'_status') === flow.get('relay_'+ msg.topic +'_output_on')){\n //               msg.template_message += ' On';\n //       } else {\n //                   msg.template_message += ' Off';\n //       }\n//---------------------------------------------------- Sets Template Message To Push ---------------------------------\n        \n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 720,
-        "y": 580,
+        "x": 760,
+        "y": 660,
         "wires": [
             [
-                "2c78feed.c1461a"
+                "cd8e1941.be0618"
             ]
         ]
     },
@@ -708,8 +711,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "2",
-        "x": 480,
-        "y": 480,
+        "x": 540,
+        "y": 540,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -734,8 +737,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "3",
-        "x": 480,
-        "y": 520,
+        "x": 540,
+        "y": 580,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -760,8 +763,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "4",
-        "x": 480,
-        "y": 560,
+        "x": 540,
+        "y": 620,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -773,8 +776,8 @@
         "type": "ui_button",
         "z": "a737bfca.817f7",
         "name": "Relay 5 Button",
-        "group": "51732215.f4e07c",
-        "order": 18,
+        "group": "dacf2722.e769b",
+        "order": 2,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -786,8 +789,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "5",
-        "x": 480,
-        "y": 600,
+        "x": 540,
+        "y": 660,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -799,8 +802,8 @@
         "type": "ui_button",
         "z": "a737bfca.817f7",
         "name": "Relay 6 Button",
-        "group": "51732215.f4e07c",
-        "order": 22,
+        "group": "dacf2722.e769b",
+        "order": 6,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -812,8 +815,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "6",
-        "x": 480,
-        "y": 640,
+        "x": 540,
+        "y": 700,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -825,8 +828,8 @@
         "type": "ui_button",
         "z": "a737bfca.817f7",
         "name": "Relay 7 Button",
-        "group": "51732215.f4e07c",
-        "order": 26,
+        "group": "dacf2722.e769b",
+        "order": 10,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -838,8 +841,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "7",
-        "x": 480,
-        "y": 680,
+        "x": 540,
+        "y": 740,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -851,8 +854,8 @@
         "type": "ui_button",
         "z": "a737bfca.817f7",
         "name": "Relay 8 Button",
-        "group": "51732215.f4e07c",
-        "order": 30,
+        "group": "dacf2722.e769b",
+        "order": 14,
         "width": 5,
         "height": 1,
         "passthru": false,
@@ -864,8 +867,8 @@
         "payload": "flip",
         "payloadType": "str",
         "topic": "8",
-        "x": 480,
-        "y": 720,
+        "x": 540,
+        "y": 780,
         "wires": [
             [
                 "aebad4a8.9cb6b8"
@@ -877,13 +880,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 2\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 2\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 480,
+        "x": 380,
+        "y": 540,
         "wires": [
             [
                 "29812864.ef57a8"
@@ -895,13 +898,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 3\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 3\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 520,
+        "x": 380,
+        "y": 580,
         "wires": [
             [
                 "79ab48ba.73e33"
@@ -913,13 +916,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 4\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 4\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 560,
+        "x": 380,
+        "y": 620,
         "wires": [
             [
                 "c7bdb6c.59a0648"
@@ -931,13 +934,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 5\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 5\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 600,
+        "x": 380,
+        "y": 660,
         "wires": [
             [
                 "2e8c1aa6.3106ae"
@@ -949,13 +952,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 6\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 6\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 640,
+        "x": 380,
+        "y": 700,
         "wires": [
             [
                 "4fdc7a63.fa1c8c"
@@ -967,13 +970,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 7\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 7\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 680,
+        "x": 380,
+        "y": 740,
         "wires": [
             [
                 "6d1b9e90.7bb448"
@@ -985,13 +988,13 @@
         "type": "function",
         "z": "a737bfca.817f7",
         "name": "",
-        "func": "\nrelay_id = 8\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\n\n\nreturn msg;",
+        "func": "\nrelay_id = 8\n\nmsg.topic = flow.get('relay_' + relay_id + '_text_name');\n\nif (flow.get('relay_' + relay_id + '_button_enabled') === 1) { msg.enabled = true;} else { msg.enabled = false;}\n\nif (flow.get('relay_' + relay_id + '_pin') === 99) { msg.enabled = false;}\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 320,
-        "y": 720,
+        "x": 380,
+        "y": 780,
         "wires": [
             [
                 "1b487a2b.ff7b86"
@@ -1009,7 +1012,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 360,
+        "y": 260,
         "wires": []
     },
     {
@@ -1023,7 +1026,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 400,
+        "y": 300,
         "wires": []
     },
     {
@@ -1037,7 +1040,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 440,
+        "y": 340,
         "wires": []
     },
     {
@@ -1051,7 +1054,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 480,
+        "y": 380,
         "wires": []
     },
     {
@@ -1065,7 +1068,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 520,
+        "y": 420,
         "wires": []
     },
     {
@@ -1079,7 +1082,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 560,
+        "y": 460,
         "wires": []
     },
     {
@@ -1093,7 +1096,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 600,
+        "y": 500,
         "wires": []
     },
     {
@@ -1107,7 +1110,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 640,
+        "y": 540,
         "wires": []
     },
     {
@@ -1121,7 +1124,7 @@
         "freq": "",
         "out": "out",
         "x": 1240,
-        "y": 680,
+        "y": 580,
         "wires": []
     },
     {
@@ -1135,7 +1138,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 360,
+        "y": 260,
         "wires": [
             [
                 "2d137fac.f9fc88"
@@ -1153,7 +1156,7 @@
         "initialize": "",
         "finalize": "",
         "x": 900,
-        "y": 360,
+        "y": 260,
         "wires": [
             [
                 "2db5af0.6ab3ad2",
@@ -1177,7 +1180,7 @@
             "26784e11.619be2"
         ],
         "x": 795,
-        "y": 340,
+        "y": 240,
         "wires": [
             [
                 "95db234c.3baea"
@@ -1195,7 +1198,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 400,
+        "y": 300,
         "wires": [
             [
                 "11e632d9.92e01d"
@@ -1213,7 +1216,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 440,
+        "y": 340,
         "wires": [
             [
                 "913761e8.3e8fe8"
@@ -1231,7 +1234,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 480,
+        "y": 380,
         "wires": [
             [
                 "da0e7726.637d48"
@@ -1249,7 +1252,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 520,
+        "y": 420,
         "wires": [
             [
                 "c007762b.be335"
@@ -1267,7 +1270,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 560,
+        "y": 460,
         "wires": [
             [
                 "232164d1.9a0274"
@@ -1285,7 +1288,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 600,
+        "y": 500,
         "wires": [
             [
                 "81312417.fccde8"
@@ -1303,7 +1306,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "3483fbc9.beee24"
@@ -1321,7 +1324,7 @@
         "initialize": "",
         "finalize": "",
         "x": 1100,
-        "y": 680,
+        "y": 580,
         "wires": [
             [
                 "8ebfb26f.802ff"
@@ -1339,7 +1342,7 @@
         "overwriteFile": "true",
         "encoding": "none",
         "x": 260,
-        "y": 280,
+        "y": 260,
         "wires": [
             []
         ]
@@ -1355,7 +1358,7 @@
         "initialize": "",
         "finalize": "",
         "x": 240,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "35f81833.41103"
@@ -1369,10 +1372,11 @@
         "name": "",
         "links": [
             "cd8e1941.be0618",
-            "98421a67.23cad8"
+            "98421a67.23cad8",
+            "708085ef.a54f5c"
         ],
         "x": 95,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "555be96c.392c9"
@@ -1390,8 +1394,8 @@
             "3ee60592.3fe1ea",
             "5bc54e1d.a1527"
         ],
-        "x": 855,
-        "y": 620,
+        "x": 895,
+        "y": 660,
         "wires": []
     },
     {
@@ -1405,8 +1409,8 @@
             "3ee60592.3fe1ea",
             "5bc54e1d.a1527"
         ],
-        "x": 1235,
-        "y": 180,
+        "x": 1195,
+        "y": 160,
         "wires": []
     },
     {
@@ -1416,10 +1420,11 @@
         "name": "",
         "links": [
             "cd8e1941.be0618",
-            "98421a67.23cad8"
+            "98421a67.23cad8",
+            "708085ef.a54f5c"
         ],
         "x": 795,
-        "y": 840,
+        "y": 820,
         "wires": [
             [
                 "994f1253.bbd358"
@@ -1433,10 +1438,11 @@
         "name": "",
         "links": [
             "cd8e1941.be0618",
-            "98421a67.23cad8"
+            "98421a67.23cad8",
+            "708085ef.a54f5c"
         ],
         "x": 795,
-        "y": 380,
+        "y": 280,
         "wires": [
             [
                 "95db234c.3baea"
@@ -1454,7 +1460,7 @@
         "initialize": "",
         "finalize": "",
         "x": 640,
-        "y": 100,
+        "y": 80,
         "wires": [
             [
                 "53f17d4b.509fec"
@@ -1472,7 +1478,7 @@
         "sendError": false,
         "encoding": "none",
         "x": 640,
-        "y": 140,
+        "y": 120,
         "wires": [
             [
                 "73cb2a3e.7bd534"
@@ -1490,7 +1496,7 @@
         "initialize": "",
         "finalize": "",
         "x": 640,
-        "y": 180,
+        "y": 160,
         "wires": [
             []
         ]
@@ -1502,7 +1508,7 @@
         "name": "GPIO Pin Section",
         "info": "These functions should not need to be changed or adjusted.\n\nThis section cross references the GPIO Pin numbers as defined in the 'Startup Settings' function to see if they are used. If they are, the settings initial, loaded, and updated settings for each GPIO is pushed to the respected pin.",
         "x": 920,
-        "y": 320,
+        "y": 220,
         "wires": []
     },
     {
@@ -1512,25 +1518,25 @@
         "name": "Dashboard LED Section",
         "info": "This section updated the Dashboard LEDs anytime a dashboard button is changed, when previous settings are loaded, or when API calls are made.",
         "x": 950,
-        "y": 760,
+        "y": 740,
         "wires": []
     },
     {
         "id": "927a645f.7dae08",
         "type": "ui_template",
         "z": "a737bfca.817f7",
-        "group": "51732215.f4e07c",
+        "group": "e9bdef0f.8aedf",
         "name": "",
-        "order": 34,
+        "order": 1,
         "width": 7,
         "height": 4,
-        "format": "<div>\n  {{msg.template_text_1}}<br>\n  {{msg.template_text_2}}<br>\n  {{msg.template_text_3}}<br>\n  {{msg.template_text_4}}<br>\n  {{msg.template_text_5}}<br>\n  {{msg.template_text_6}}<br>\n  {{msg.template_text_7}}<br>\n  {{msg.template_text_8}}\n</div>\n",
+        "format": "<div>\n  {{msg.template_text_1}}<br>\n  {{msg.template_text_2}}<br>\n  {{msg.template_text_3}}<br>\n  {{msg.template_text_4}}<br>\n  {{msg.template_text_5}}<br>\n  {{msg.template_text_6}}<br>\n  {{msg.template_text_7}}<br>\n  {{msg.template_text_8}}<br>\n  {{msg.template_text_9}}\n</div>\n",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
-        "x": 620,
-        "y": 300,
+        "x": 520,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1539,14 +1545,14 @@
         "id": "6ea94d8c.fc59e4",
         "type": "function",
         "z": "a737bfca.817f7",
-        "name": "Update Dashboard Log",
-        "func": "if (msg.template_message != 0){\n\n    this_message = msg.template_message;\n\n        old_temp_log_flow = flow.get('template_log');\n        var temp_log = old_temp_log_flow.split(\",\");\n            temp_log.push(this_message);\n            temp_log.shift();\n\n                msg.template_text_1 = temp_log[7];\n                msg.template_text_2 = temp_log[6];\n                msg.template_text_3 = temp_log[5];\n                msg.template_text_4 = temp_log[4];\n                msg.template_text_5 = temp_log[3];\n                msg.template_text_6 = temp_log[2];\n                msg.template_text_7 = temp_log[1];\n                msg.template_text_8 = temp_log[0];\n\n            flow.set('template_log',temp_log.join())\n    return msg;\n}",
+        "name": "Update Dashboard Template Logs",
+        "func": "if (msg.template_message != 0){\n\n    this_message = msg.template_message;\n\n        old_temp_log_flow = flow.get('template_log');\n        var temp_log = old_temp_log_flow.split(\",\");\n            temp_log.push(this_message);\n            temp_log.shift();\n\n                msg.template_text_1 = temp_log[8];\n                msg.template_text_2 = temp_log[7];\n                msg.template_text_3 = temp_log[6];\n                msg.template_text_4 = temp_log[5];\n                msg.template_text_5 = temp_log[4];\n                msg.template_text_6 = temp_log[3];\n                msg.template_text_7 = temp_log[2];\n                msg.template_text_8 = temp_log[1];\n                msg.template_text_9 = temp_log[0];\n\n            flow.set('template_log',temp_log.join())\n    return msg;\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 670,
-        "y": 260,
+        "x": 280,
+        "y": 380,
         "wires": [
             [
                 "927a645f.7dae08"
@@ -1560,10 +1566,598 @@
         "name": "",
         "links": [
             "cd8e1941.be0618",
-            "98421a67.23cad8"
+            "98421a67.23cad8",
+            "708085ef.a54f5c"
         ],
-        "x": 515,
-        "y": 260,
+        "x": 95,
+        "y": 340,
+        "wires": [
+            [
+                "32bba20f.c0d376"
+            ]
+        ]
+    },
+    {
+        "id": "da87bbb8.d2bfb8",
+        "type": "ui_ui_control",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "x": 340,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0f42f0.700595",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"group\": {\"show\": [\"Home_Relays_5-8\"]}}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 1880,
+        "wires": [
+            [
+                "88fbef1.902cb9"
+            ]
+        ]
+    },
+    {
+        "id": "88fbef1.902cb9",
+        "type": "ui_ui_control",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "x": 320,
+        "y": 1880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fe348f2e.053cc8",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "func": "\nif (flow.get('show_relay_5-8_box_mode') === 'auto'){\n    \n    if (flow.get('relay_5_pin') === 99 && flow.get('relay_6_pin') === 99 && flow.get('relay_7_pin') === 99 && flow.get('relay_8_pin') === 99 ){ show_second_box = false; }\n    else { show_second_box = true; }\n    \n}\n\nif (flow.get('show_relay_5-8_box_mode') === 'user'){\n\n    if (flow.get('show_relay_5-8_box')) {show_second_box = true;} else { show_second_box = false; }\n\n}\n\nif (show_second_box) { msg.payload = {\"group\": {\"show\": [\"Home_Relays_5-8\"]}};} else {msg.payload = {\"group\": {\"hide\": [\"Home_Relays_5-8\"]}};}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 200,
+        "y": 880,
+        "wires": [
+            [
+                "da87bbb8.d2bfb8"
+            ]
+        ]
+    },
+    {
+        "id": "64fa8e1.261a77",
+        "type": "ui_ui_control",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "x": 340,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b361d2f.63672c",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "func": "if (flow.get('show_relay_log_output')) {msg.payload = {\"group\": {\"show\": [\"Home_Relay_Command_Output\"]}};}\nelse {msg.payload = {\"group\": {\"hide\": [\"Home_Relay_Command_Output\"]}};}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 200,
+        "y": 920,
+        "wires": [
+            [
+                "64fa8e1.261a77"
+            ]
+        ]
+    },
+    {
+        "id": "409c57a9.be6f4",
+        "type": "link in",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "links": [
+            "26784e11.619be2"
+        ],
+        "x": 95,
+        "y": 900,
+        "wires": [
+            [
+                "fe348f2e.053cc8",
+                "7b361d2f.63672c"
+            ]
+        ]
+    },
+    {
+        "id": "16f63135.a8dd1f",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "Update From External Flow Trigger",
+        "func": "\n    flow.set('relay_' + parseInt(msg.relay_number) + '_status',parseInt(msg.new_relay_status));\n    \n\n    msg.template_from = 'E';\n    msg.template_type = 'action';\n    msg.template_relay_verb = 'Triggered';\n    msg.template_relay_number = parseInt(msg.relay_number);\n    \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 280,
+        "y": 1120,
+        "wires": [
+            [
+                "708085ef.a54f5c"
+            ]
+        ]
+    },
+    {
+        "id": "708085ef.a54f5c",
+        "type": "link out",
+        "z": "a737bfca.817f7",
+        "name": "update on change",
+        "links": [
+            "d3d06be1.ecd678",
+            "731c30a.8bcda5",
+            "3ee60592.3fe1ea",
+            "5bc54e1d.a1527"
+        ],
+        "x": 475,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "ece12a0b.b95788",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "External Flow Link Input To Relay",
+        "func": "\nthis_relay_number = parseInt(msg.relay_number);\n\nif (this_relay_number > 0 && this_relay_number < 9) {\n\n        current_relay_status = flow.get('relay_' + this_relay_number + '_status');\n//        msg.current_relay_status = flow.get('relay_1_status'); \n        \n\n    if (flow.get('relay_' + this_relay_number + '_output_on') === 0) { relay_on = 0; relay_off = 1; } else  { relay_on = 1; relay_off = 0; }\n\n    if (msg.relay_trigger_type === 'on_off'){ if (msg.relay_trigger === 'on' ){ msg.new_relay_status = relay_on; } else { msg.new_relay_status = relay_off;}}\n    if (msg.relay_trigger_type === 'true_false'){ if (msg.relay_trigger === true ){ msg.new_relay_status = relay_on; } else { msg.new_relay_status = relay_off; }}\n    if (msg.relay_trigger_type === 'value_below_on'){ if (parseInt(msg.relay_current_value) < parseInt(msg.relay_setpoint)) { msg.new_relay_status = relay_on; } else { msg.new_relay_status = relay_off; } }\n    if (msg.relay_trigger_type === 'value_above_on'){ if (parseInt(msg.relay_current_value) > parseInt(msg.relay_setpoint)) { msg.new_relay_status = relay_on; } else { msg.new_relay_status = relay_off; } }\n\n    return msg;\n\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 280,
+        "y": 1080,
+        "wires": [
+            [
+                "16f63135.a8dd1f",
+                "36fb94ac.d46aac"
+            ]
+        ]
+    },
+    {
+        "id": "c1319ecc.5322a",
+        "type": "link in",
+        "z": "a737bfca.817f7",
+        "name": "External Flow Link Relay 1",
+        "links": [
+            "a3eae825.c32418"
+        ],
+        "x": 95,
+        "y": 1080,
+        "wires": [
+            [
+                "ece12a0b.b95788"
+            ]
+        ]
+    },
+    {
+        "id": "1423e9d7.f78536",
+        "type": "comment",
+        "z": "a737bfca.817f7",
+        "name": "External Flow Links",
+        "info": "\n4 trigger types accepted:\n\n  on/off - required msg.payload_type = 'on_off' and a msg.payload of either 'on' or 'off' to change status\n  true/false - requires msg.payload.type = 'true_false' and a msg.payload of either boolean true or boolean false\n\n\n  value_below_on - *requires msg.payload.type = 'value_below_on' and a msg.payload of current value and a msg.payload_setpoint as the trigger value\n  value_above_on - *requires msg.payload.type = 'value_above_on' and a msg.payload of current value and a msg.payload_setpoint as the trigger value\n\n      *both msg.payload and msg.payload_setpoint can be int or string values. Function handles either.\n\n",
+        "x": 230,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "c06ce27a.935ec8",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type on_off port 1 on",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'on_off';\nmsg.template_type = 'action';\nmsg.relay_trigger = 'on'\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 1440,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "4cfcbd21.52599c",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1440,
+        "wires": [
+            [
+                "c06ce27a.935ec8"
+            ]
+        ]
+    },
+    {
+        "id": "1821f17b.cea86f",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1480,
+        "wires": [
+            [
+                "25d7d279.cc6976"
+            ]
+        ]
+    },
+    {
+        "id": "25d7d279.cc6976",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type on_off port 1 off",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'on_off';\nmsg.template_type = 'action';\nmsg.relay_trigger = 'off'\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 360,
+        "y": 1480,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "3a7d0f02.37d5d",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type boolean port 1 true",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'true_false';\nmsg.template_type = 'action';\nmsg.relay_trigger = true;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 1540,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "ad84aa63.7ef4b8",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1540,
+        "wires": [
+            [
+                "3a7d0f02.37d5d"
+            ]
+        ]
+    },
+    {
+        "id": "f2773fe5.5993a",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1580,
+        "wires": [
+            [
+                "f64752e5.7bc85"
+            ]
+        ]
+    },
+    {
+        "id": "f64752e5.7bc85",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type boolean port 1 false",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'true_false';\nmsg.template_type = 'action';\nmsg.relay_trigger = false;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 370,
+        "y": 1580,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "2a47e1e8.ecbeae",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1680,
+        "wires": [
+            [
+                "bbc88b78.c760a8"
+            ]
+        ]
+    },
+    {
+        "id": "bbc88b78.c760a8",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type value_below_on port 1 value 80 set 50",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'value_below_on';\nmsg.template_type = 'action';\nmsg.relay_current_value = 80;\nmsg.relay_setpoint = 50\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 1680,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "a189934b.6e1cd8",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1640,
+        "wires": [
+            [
+                "74946676.e68b8"
+            ]
+        ]
+    },
+    {
+        "id": "74946676.e68b8",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type value_below_on port 1 value 30 set 50",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'value_below_on';\nmsg.template_type = 'action';\nmsg.relay_current_value = 30;\nmsg.relay_setpoint = 50\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 1640,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "29dda7cd.685e38",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1740,
+        "wires": [
+            [
+                "9de3e318.2a8ae8"
+            ]
+        ]
+    },
+    {
+        "id": "9de3e318.2a8ae8",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type value_above_on port 1 value 80 set 50",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'value_above_on';\nmsg.template_type = 'action';\nmsg.relay_current_value = 80;\nmsg.relay_setpoint = 50\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 1740,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "8a74b942.8f57",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1780,
+        "wires": [
+            [
+                "3b63ceb2.06002a"
+            ]
+        ]
+    },
+    {
+        "id": "3b63ceb2.06002a",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "type value_above_on port 1 value 30 set 50",
+        "func": "msg.relay_number = 1;\nmsg.relay_trigger_type = 'value_above_on';\nmsg.template_type = 'action';\nmsg.relay_current_value = 30;\nmsg.relay_setpoint = 50\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 1780,
+        "wires": [
+            [
+                "a3eae825.c32418"
+            ]
+        ]
+    },
+    {
+        "id": "32bba20f.c0d376",
+        "type": "function",
+        "z": "a737bfca.817f7",
+        "name": "Global Push To Template",
+        "func": "template_from = msg.template_from;\ntemplate_type = msg.template_type;\nrelay_verb =    msg.template_relay_verb;\nrelay_number =  msg.template_relay_number;\n\n\n\n        var d = new Date();\n            if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n            if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n            if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n        \n        msg.template_message = '[' + hours + ':' + minutes + ':' + seconds + '] [' + template_from + '] ';\n\n            if (template_type === 'action') {\n\n                            msg.template_message +=  flow.get('relay_'+ relay_number +'_text_name') + ' ' + relay_verb + ' ';\n\n                                if (flow.get('relay_'+ relay_number +'_status') === flow.get('relay_'+ relay_number +'_output_on')){\n                                    msg.template_message += ' On';\n                                } else {\n                                    msg.template_message += ' Off';\n                                }\n            \n            }\n            \n            \n            if (template_type === 'status_request') {\n                                                        if (relay_number === 0) {\n                                                                                    msg.template_message += ' Full Status Request';\n                                                        } else {\n                                                                                    msg.template_message += flow.get('relay_'+ relay_number +'_text_name') + ' Status Request';\n                                                        }\n            }\n            \n    \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 250,
+        "y": 340,
         "wires": [
             [
                 "6ea94d8c.fc59e4"
@@ -1571,51 +2165,119 @@
         ]
     },
     {
-        "id": "2c78feed.c1461a",
-        "type": "function",
+        "id": "a3eae825.c32418",
+        "type": "link out",
         "z": "a737bfca.817f7",
-        "name": "Push Template",
-        "func": "msg.template_message = 0;\n\nif (msg.payload === 'flip'){\n\n //---------------------------------------------------- Sets Template Message To Push ---------------------------------\n        var d = new Date();\n            if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n            if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n            if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n        \n        msg.template_message = '[' + hours + ':' + minutes + ':' + seconds + '] ';\n        msg.template_message += '[D] ' + flow.get('relay_'+ msg.topic +'_text_name');\n        if (flow.get('relay_'+ msg.topic +'_status') === flow.get('relay_'+ msg.topic +'_output_on')){\n                msg.template_message += ' On';\n        } else {\n                    msg.template_message += ' Off';\n        }\n//---------------------------------------------------- Sets Template Message To Push ---------------------------------\nreturn msg;    \n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 720,
-        "y": 620,
+        "name": "",
+        "links": [
+            "c1319ecc.5322a"
+        ],
+        "x": 735,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "fdaef1a4.5e19",
+        "type": "comment",
+        "z": "a737bfca.817f7",
+        "name": "This Section For Testing Of External Flow Input Commands",
+        "info": "",
+        "x": 310,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "32d696fc.1ee402",
+        "type": "inject",
+        "z": "a737bfca.817f7",
+        "name": "Fake Temperature Sensor Reporting At 10s Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 310,
+        "y": 2120,
         "wires": [
             [
-                "cd8e1941.be0618"
+                "6c6e1aea.fe7104"
             ]
         ]
     },
     {
-        "id": "e91de6ee.b0da28",
+        "id": "6c6e1aea.fe7104",
         "type": "function",
         "z": "a737bfca.817f7",
-        "name": "Push Template",
-        "func": "\nvar d = new Date();\n            if (d.getHours() < 10){hours = '0' + d.getHours();} else {hours = d.getHours();}\n            if (d.getMinutes() < 10){minutes = '0' + d.getMinutes();} else {minutes = d.getMinutes();}\n            if (d.getSeconds() < 10){seconds = '0' + d.getSeconds();} else {seconds = d.getSeconds();}\n        \n        pre_template_message = '[' + hours + ':' + minutes + ':' + seconds + '] [A] ';\n\nmsg.template_message = pre_template_message + msg.template_message;\n\n//---------------------------------------------------- Sets Template Message To Push ---------------------------------\nreturn msg;    \n",
+        "name": "",
+        "func": "\n    current_temperature = Math.floor((Math.random() * 100) + 1);    // Replace with real number\n    msg.payload = current_temperature;\n    // -------------------------------------- Pass this to relay controller flow ------------------------------------------------\n    //\n    \n        msg.relay_number = 3;                                   // Enable which relay port?\n        msg.relay_trigger_type = 'value_above_on';              // Type of command to process\n        msg.template_type = 'action';                           // Type of message to show\n        msg.relay_current_value = current_temperature;          // Current temperature\n        msg.relay_setpoint = 50;                                // Has to be higher than this value\n\n    //\n    // --------------------------------------------------------------------------------------------------------------------------\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
-        "x": 1040,
-        "y": 180,
+        "x": 620,
+        "y": 2120,
         "wires": [
             [
-                "98421a67.23cad8",
-                "45303002.d316e",
-                "78aaf665.9012a8"
+                "a3eae825.c32418"
             ]
         ]
+    },
+    {
+        "id": "36fb94ac.d46aac",
+        "type": "debug",
+        "z": "a737bfca.817f7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 1080,
+        "wires": []
     },
     {
         "id": "51732215.f4e07c",
         "type": "ui_group",
-        "name": "Home",
+        "name": "Relays 1-4",
         "tab": "40f1a654.3641b",
         "order": 1,
         "disp": true,
-        "width": 8,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "dacf2722.e769b",
+        "type": "ui_group",
+        "name": "Relays 5-8",
+        "tab": "40f1a654.3641b",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "e9bdef0f.8aedf",
+        "type": "ui_group",
+        "name": "Relay Command Output",
+        "tab": "40f1a654.3641b",
+        "order": 3,
+        "disp": true,
+        "width": "8",
         "collapse": false
     },
     {
