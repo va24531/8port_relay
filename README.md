@@ -14,8 +14,24 @@ Requirements: Raspberry Pi (2/3B/4 or newer)
               
               Raspberry Pi GPIO (node-red-node-pi-gpio v1.2.3 or newer)
               
+(01/01/21) Newly Added Features
 
-Newly Added Features:
+  - Added API access via 'Link' from other flows that may be installed on your system, making it simple to change relay settings without messing with any code.
+  
+  - Added 4 different 'Trigger' events for each relay via Linked messages from other flows. 
+        String 'True' / 'False', Boomlean true / false, and value_above_on / value_below_on with passable threshold value. 
+  
+  - There was a request for a clearer looking GUI so that if only a 4 relay board was used, all 8 options would not be shown. Now, the GUI is broken into 3 parts,
+      relays 1-4 in one widget, 5-8 in another, and the logging in a seperate widget. The system now automatically adjust if buttons for relay 5-8 are shown, however
+      they can be forced on by the user, if so desired.
+      
+  -   Logging of the last 10 commands shown on the GUI is totally optional now, and can be enabled/disabled in the configuration function.
+  
+  -   Copy and Paste Examples of how to pass commands from another flow is included and shown at the bottom of the flow.
+            * They are NOT active, and can be used in another flow and has inline documentation included. *
+
+
+(12/29/20) Newly Added Features:
 
   - Option to restore last relay settings on startup, or return to pre-configured state.
   - Automatically save relay settings on any change to file 'relay_controller_settings.csv'
