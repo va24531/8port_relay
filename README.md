@@ -19,7 +19,7 @@ Requirements: Raspberry Pi (2/3B/4 or newer)
   - Added API access via 'Link' from other flows that may be installed on your system, making it simple to change relay settings without messing with any code.
   
   - Added 4 different 'Trigger' events for each relay via Linked messages from other flows. 
-        String 'True' / 'False', Boomlean true / false, and value_above_on / value_below_on with passable threshold value. 
+        String 'True' / 'False', Boolean true / false, and value_above_on / value_below_on with passable threshold value. 
   
   - There was a request for a clearer looking GUI so that if only a 4 relay board was used, all 8 options would not be shown. Now, the GUI is broken into 3 parts,
       relays 1-4 in one widget, 5-8 in another, and the logging in a seperate widget. The system now automatically adjust if buttons for relay 5-8 are shown, however
